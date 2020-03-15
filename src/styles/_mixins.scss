@@ -1,0 +1,36 @@
+@mixin neo-outline-small {
+  background: linear-gradient(145deg, #09141b, #10202b);
+  box-shadow: 5px 5px 5px #0b1820, -3px -3px 5px #183444;
+}
+
+@mixin neo-inline {
+  background: #0e1e28 !important;
+  box-shadow: inset 5px 5px 4px #0a161e, inset -5px -5px 4px #173142 !important;
+}
+
+@mixin neo-colorful($color) {
+  background-color: $color;
+  background: linear-gradient(145deg, darken($color, $amount: 18%), darken($color, $amount: 5%));
+  box-shadow: 3px 3px 5px darken($color, $amount: 40%), -2px -2px 5px darken($color, $amount: 25%);
+}
+
+@mixin neo-text($color) {
+  color: $color;
+  text-shadow: 3px 3px 5px darken($color, $amount: 40%), -2px -2px 5px darken($color, $amount: 25%);
+}
+
+
+@mixin neo-outline-big {
+  background: linear-gradient(145deg, #0f202b, #0d1b24);
+  box-shadow: 5px 5px 15px #081016, -5px -5px 15px #183242;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

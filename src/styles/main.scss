@@ -1,0 +1,318 @@
+@import "./variables";
+@import "./mixins";
+@import "./spinner";
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body,
+body * {
+  box-sizing: border-box;
+  outline: none;
+  font-family: $font-primary;
+}
+body {
+  background-color: $base-color;
+}
+main {
+  padding: 20px;
+  @include flex-col;
+}
+
+header {
+  @include neo-outline-big;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 20px;
+  margin-bottom: 20px;
+  height: 200px;
+  color: $secondary-color;
+}
+.user {
+  display: inline-flex;
+  align-items: center;
+  height: 80px;
+}
+.user span {
+  color: $primary-color;
+  font-style: italic;
+}
+
+.img-container {
+  width: 300px;
+  height: 80px;
+  @include flex-center;
+  @include neo-inline;
+  border-radius: 1rem;
+}
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  @include neo-outline-small;
+  margin-left: 10px;
+}
+
+input {
+  border: none;
+}
+form {
+  @include flex-col;
+  padding: 15px;
+  border-radius: 1em;
+  color: $secondary-color;
+  @include neo-outline-big;
+  width: 49%;
+}
+
+form * {
+  margin: 3px;
+}
+.input-container {
+  @include flex-col;
+}
+
+.input-container input {
+  height: 50px;
+  color: $secondary-color;
+}
+
+label {
+  font-size: 1.2rem;
+  color: $primary-color;
+}
+
+input[type="text"] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  @include neo-inline;
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+  border-radius: 1rem;
+}
+
+@-webkit-keyframes autofill {
+  to {
+    color: $secondary-color;
+    background: $base-color;
+  }
+}
+
+button:first-child {
+  color: $secondary-color;
+  font-size: 1rem;
+}
+
+.radio-container,
+.check-container {
+  display: block;
+  position: relative;
+  padding-left: 37px;
+  padding-top: 7px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.radio-container input,
+.check-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radio-container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  @include neo-inline;
+}
+.check-container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  border-radius: 0.3rem;
+  @include neo-inline;
+}
+
+.radio-container input:checked ~ .checkmark::after {
+  @include neo-colorful($primary-color);
+}
+.check-container input ~ .checkmark::after {
+  display: none;
+}
+.check-container input:checked ~ .checkmark::after {
+  display: block;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+.radio-container .checkmark:after {
+  top: 25%;
+  left: 25%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.check-container .checkmark:after {
+  left: 40%;
+  top: 24%;
+  width: 5px;
+  height: 10px;
+  border: solid $primary-color;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.buttons {
+  display: flex;
+}
+.button-container {
+  @include neo-inline;
+  border-radius: 1rem;
+  @include flex-center;
+  width: 170px;
+  height: 50px;
+}
+.btn {
+  height: 65%;
+  width: 90%;
+  border: none;
+  @include neo-colorful($primary-color);
+  border-radius: 0.6rem;
+  font-weight: bold;
+}
+.btn:active {
+  box-shadow: none;
+}
+.btn:hover {
+  background: darken($color: $primary-color, $amount: 20);
+}
+
+.button-container:first-child {
+  width: 82px;
+}
+.button-container:first-child .btn {
+  @include neo-colorful(grey);
+  width: 85%;
+}
+.button-container:first-child .btn:active {
+  box-shadow: none;
+}
+.button-container:first-child .btn:hover {
+  background: darken($color: grey, $amount: 20);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.logo-container h1 {
+  font-size: 2.4rem;
+  @include neo-text($secondary-color);
+}
+.logo-out {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include neo-inline;
+  border-radius: 1rem;
+  margin-right: 10px;
+}
+.logo-in {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  @include neo-colorful($primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  background-image: url(../img/github-logo.svg);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.second-container {
+  display: flex;
+  justify-content: space-between;
+  max-height: 600px;
+}
+ul {
+  width: 49%;
+  padding: 20px;
+  margin: 0;
+  @include flex-col;
+  @include neo-inline;
+  border-radius: 1rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 70%;
+}
+ul::-webkit-scrollbar {
+  width: 20px;
+}
+
+ul::-webkit-scrollbar-track {
+  @include neo-inline;
+}
+
+ul::-webkit-scrollbar-thumb {
+  @include neo-colorful($primary-color);
+}
+a {
+  color: $secondary-color;
+  height: 110px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+a * {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style-type: none;
+  @include neo-outline-big;
+  width: 100%;
+  height: 110px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 20px 20px 20px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.active {
+  display: block;
+}
