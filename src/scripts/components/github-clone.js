@@ -9,15 +9,27 @@ export default class GithubClone {
          <div class="logo-out"><div class="logo-in"><div class="logo"></div></div></div>
           <h1>GitHub clone</h1>
         </section>
+        
         <section class="user"><div class="img-container">
-          <h4>Signed in as <span class="user-name"></span></h4>
+         <section>
+         <button class="new-repo">New Repository</button>
+         </section>
+         <h4>Signed in as <span class="user-name"></span></h4>
           <img src="" alt="" class="avatar" /></div>
         </section>
-      
         `;
 
     this.form = `
-       
+        <div class="block"> 
+          <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+        </div>
+        <button id="btn-x">×</button>
         <h1>Create New Repository</h1>
         <div class="input-container">
           <label for="repo-name">Repository Name</label>
@@ -48,35 +60,28 @@ export default class GithubClone {
           <div>This will let you immediately clone the repository to your computer.</div>
         </div>
         <div class="buttons">
-         <div class="button-container"><button class="btn">Cancel</button></div><div class="button-container"><button class="btn" id="create-repo">Create Repository</button></div>
+         <div class="button-container"><button class="btn" id="cancel">Cancel</button></div><div class="button-container"><button class="btn" id="create-repo">Create Repository</button></div>
          </div>
      
       `;
-    this.spinner = ` 
-    <div class="spinner">
-      <div class="rect1"></div>
-      <div class="rect2"></div>
-      <div class="rect3"></div>
-      <div class="rect4"></div>
-      <div class="rect5"></div>
-    </div>
-  `;
 
     this.apiKey = process.env.API_KEY;
     this.baseURL = `https://api.github.com`;
     this.header = document.createElement("header");
-    this.mainContainer = document.createElement("section");
-    this.mainContainer.classList.add("second-container");
+
+    this.sideBar = document.createElement("section");
+    this.sideBar.classList.add("side-bar");
     this.header.innerHTML = this.headerContent;
     this.formContainer = document.createElement("form");
     this.formContainer.innerHTML = this.form;
     this.listContainer = document.createElement("ul");
     this.destinationSelect.appendChild(this.header);
-    this.mainContainer.appendChild(this.formContainer);
-    this.destinationSelect.appendChild(this.mainContainer);
-    this.addEvent();
+    this.sideBar.appendChild(this.formContainer);
+    this.destinationSelect.appendChild(this.sideBar);
+    this.addEventToForm();
     this.getUserInfo();
     this.getUserRepos();
+    this.addEventToNewRepoButtons();
   }
 
   async getUserInfo() {
@@ -97,7 +102,7 @@ export default class GithubClone {
 
   async getUserRepos() {
     try {
-      let response = await fetch(`${this.baseURL}/user/repos`, {
+      let response = await fetch(`${this.baseURL}/user/repos?sort=created&direction=desc`, {
         method: "GET",
         headers: {
           Authorization: `token ${this.apiKey}`
@@ -106,8 +111,8 @@ export default class GithubClone {
       let data = await response.json();
 
       if (!response.ok) {
-        this.listContainer.innerHTML = this.spinner;
-        this.mainContainer.appendChild(this.listContainer);
+        this.spinner.style.display = "block";
+        this.listContainer.style.display = "none";
       } else {
         let listRepos = data
           .map(userObj => {
@@ -133,7 +138,7 @@ export default class GithubClone {
           .join("\n");
 
         this.listContainer.innerHTML = listRepos;
-        this.mainContainer.appendChild(this.listContainer);
+        this.destinationSelect.appendChild(this.listContainer);
       }
     } catch (error) {
       console.log(error);
@@ -148,25 +153,44 @@ export default class GithubClone {
       auto_init: document.querySelector("#initialize-readme").checked
     };
 
-    
-
-    let response = await fetch(`${this.baseURL}/user/repos`, {
-      method: "POST", // or 'PUT'
-      headers: {
-        Authorization: `token ${this.apiKey}`
-      },
-      body: JSON.stringify(formData)
+    document.querySelector("#create-repo").addEventListener("click", async event => {
+      event.preventDefault();
+      let response = await fetch(`${this.baseURL}/user/repos`, {
+        method: "POST", 
+        headers: {
+          Authorization: `token ${this.apiKey}`
+        },
+        body: JSON.stringify(formData)
+      });
+      let data = await response.json();
+      this.getUserRepos();
+      console.log("success", data);
+      document.querySelector(".block").style.display = "none";
     });
-
-    let data = await response.json();
-    if (data) console.log("success", data);
-    this.getUserRepos();
   }
 
-  addEvent() {
+  addEventToForm() {
     document.querySelector("#create-repo").addEventListener("click", event => {
       event.preventDefault();
+      document.querySelector(".block").style.display = "flex";
       this.createNewRepo();
+    });
+  }
+
+  addEventToNewRepoButtons() {
+    document.querySelector(".new-repo").addEventListener("click", event => {
+      event.preventDefault();
+      document.querySelector(".side-bar").classList.add("slide-in");
+    });
+
+    document.querySelector("#btn-x").addEventListener("click", event => {
+      event.preventDefault();
+      document.querySelector(".side-bar").classList.remove("slide-in");
+    });
+
+    document.querySelector("#cancel").addEventListener("click", event => {
+      event.preventDefault();
+      document.querySelector(".side-bar").classList.remove("slide-in");
     });
   }
 }

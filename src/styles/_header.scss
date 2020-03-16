@@ -1,0 +1,88 @@
+header {
+  @include neo-outline-big;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 20px;
+  margin-bottom: 20px;
+  height: 200px;
+  color: $secondary-color;
+}
+
+.user span {
+  color: $primary-color;
+  font-style: italic;
+}
+
+.img-container {
+  width: 445px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  @include neo-inline;
+  border-radius: 1rem;
+  padding: 15px;
+}
+
+.img-container section {
+  margin-right: 20px;
+}
+.user {
+  display: inline-flex;
+  align-items: center;
+  height: 80px;
+}
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  @include neo-outline-small;
+  margin-left: 10px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.logo-container h1 {
+  font-size: 2.4rem;
+  @include neo-text($secondary-color);
+}
+.logo-out {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include neo-inline;
+  border-radius: 1rem;
+  margin-right: 10px;
+}
+.logo-in {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  @include neo-colorful($primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  background-image: url(../img/github-logo.svg);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.new-repo {
+  @include neo-outline-small;
+  border: none;
+  width: 150px;
+  height: 50px;
+  border-radius: 1rem;
+  font-weight: bold;
+}
