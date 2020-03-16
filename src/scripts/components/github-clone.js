@@ -146,27 +146,30 @@ export default class GithubClone {
   }
 
   async createNewRepo() {
-    const formData = {
-      name: document.querySelector("#repo-name").value,
-      description: document.querySelector("#description").value,
-      private: document.querySelector("form").elements.definition.value,
-      auto_init: document.querySelector("#initialize-readme").checked
-    };
+    try {
+      const formData = {
+        name: document.querySelector("#repo-name").value,
+        description: document.querySelector("#description").value,
+        private: document.querySelector("form").elements.definition.value,
+        auto_init: document.querySelector("#initialize-readme").checked
+      };
 
-    document.querySelector("#create-repo").addEventListener("click", async event => {
-      event.preventDefault();
       let response = await fetch(`${this.baseURL}/user/repos`, {
-        method: "POST", 
+        method: "POST",
         headers: {
           Authorization: `token ${this.apiKey}`
         },
         body: JSON.stringify(formData)
       });
-      let data = await response.json();
-      this.getUserRepos();
-      console.log("success", data);
-      document.querySelector(".block").style.display = "none";
-    });
+      if (response.ok) {
+        let data = await response.json();
+        this.getUserRepos();
+        console.log("success", data);
+        document.querySelector(".block").style.display = "none";
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   addEventToForm() {
