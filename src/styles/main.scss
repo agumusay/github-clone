@@ -1,9 +1,9 @@
 @import "./variables";
 @import "./mixins";
-@import "./repositories";
 @import "./spinner";
-@import "./header";
 @import "./sidebar";
+@import "./header";
+@import "./repositories";
 
 html,
 body {
@@ -40,8 +40,4 @@ main {
     color: $secondary-color;
     background: $base-color;
   }
-}
-
-.active {
-  display: block;
 }
