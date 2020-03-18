@@ -166,6 +166,10 @@ export default class GithubClone {
         this.getUserRepos();
         console.log("success", data);
         document.querySelector(".block").style.display = "none";
+      } else {
+        setTimeout(() => {
+          document.querySelector(".block").style.display = "none";
+        }, 3000);
       }
     } catch (error) {
       console.log(error);

@@ -20,11 +20,15 @@ ul::-webkit-scrollbar-thumb {
   @include neo-colorful($primary-color);
 }
 a {
+  @include neo-inline;
   color: $secondary-color;
-  height: 110px;
+  height: 150px;
   margin-bottom: 20px;
   text-decoration: none;
   width: 49%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 a * {
   padding: 0;
@@ -33,8 +37,8 @@ a * {
 li {
   list-style-type: none;
   @include neo-outline-big;
-  width: 100%;
-  height: 110px;
+  width: 95%;
+  height: 120px;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;

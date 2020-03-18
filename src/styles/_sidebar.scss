@@ -1,3 +1,4 @@
+@import "variables";
 .side-bar {
   height: 100vh;
   width: 400px;
@@ -15,7 +16,9 @@
   opacity: 1;
   transform: translateX(0);
 }
-
+.side-bar h1 {
+  color: $primary-color;
+}
 #btn-x {
   width: 40px;
   height: 40px;
@@ -46,7 +49,7 @@ form {
   @include flex-col;
   padding: 15px;
   border-radius: 1em;
-  color: $secondary-color;
+
   @include neo-outline-big;
   width: 100%;
   height: 100%;
@@ -67,7 +70,7 @@ form * {
 
 label {
   font-size: 1.2rem;
-  color: $primary-color;
+  color: $secondary-color;
 }
 
 input[type="text"] {
@@ -193,4 +196,9 @@ input[type="text"] {
 }
 .button-container:first-child .btn:hover {
   background: darken($color: grey, $amount: 20);
+}
+
+.check div {
+  color: darken($color: $secondary-color, $amount: 25);
+  font-size: 0.9rem;
 }
